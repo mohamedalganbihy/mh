@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم الذكية - الوضع الداكن</title>
-    <!-- استيراد خط تجوال -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
-    <!-- استيراد مكتبة Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -34,6 +33,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            position: relative;
         }
 
         .grid-container {
@@ -97,188 +97,88 @@
         .card-btn:hover .card-title {
             color: #93c5fd; 
         }
-    </style>
-</head>
-<body>
 
-    <div class="grid-container">
-        
-        <!-- كارت 1: الصيانة -->
-        <a href="maintenance.html" class="card-btn">
-            <i class="fa-solid fa-screwdriver-wrench card-icon"></i>
-            <div class="card-title">الصيانة</div>
-        </a>
-
-        <!-- كارت 2: النواقص -->
-        <a href="shortages.html" class="card-btn">
-            <i class="fa-solid fa-boxes-empty card-icon"></i>
-            <div class="card-title">النواقص</div>
-        </a>
-
-        <!-- كارت 3: الأجهزة -->
-        <a href="devices.html" class="card-btn">
-            <i class="fa-solid fa-mobile-screen-button card-icon"></i>
-            <div class="card-title">الأجهزة</div>
-        </a>
-
-        <!-- كارت 4: التركيبات -->
-        <a href="installations.html" class="card-btn">
-            <i class="fa-solid fa-network-wired card-icon"></i>
-            <div class="card-title">التركيبات</div>
-        </a>
-
-        <!-- كارت 5: التوافقات -->
-        <a href="compatibility.html" class="card-btn">
-            <i class="fa-solid fa-code-compare card-icon"></i>
-            <div class="card-title">التوافقات</div>
-        </a>
-
-        <!-- كارت 6: الديون -->
-        <a href="debts.html" class="card-btn">
-            <i class="fa-solid fa-file-invoice-dollar card-icon"></i>
-            <div class="card-title">الديون</div>
-        </a>
-
-    </div>
-
-</body>
-</html>
-<script><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم الذكية - الوضع الداكن</title>
-    <!-- استيراد خط تجوال -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
-    <!-- استيراد مكتبة Font Awesome للأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-color: #0f172a; 
-            --card-bg: #1e293b; 
-            --border-color: #3b82f6; 
-            --text-color: #f1f5f9; 
-            --text-title: #60a5fa; 
-            --shadow-color: rgba(59, 130, 246, 0.25); 
-            --icon-color: #3b82f6; 
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            padding: 40px 20px;
+        /* الزر العائم لإضافة جهاز */
+        .floating-add-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0d6efd 0%, #00cec9 100%);
+            color: white;
+            border-radius: 50%;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 20px;
-            max-width: 750px;
-            width: 100%;
-        }
-
-        @media (min-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .card-btn {
-            background-color: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 20px;
-            padding: 22px 15px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            color: var(--text-color);
-            aspect-ratio: 1 / 1; 
-            box-shadow: 0 8px 20px var(--shadow-color); 
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(0, 206, 201, 0.4);
             cursor: pointer;
+            border: none;
+            transition: transform 0.2s target, box-shadow 0.2s;
+            z-index: 999;
+        }
+        .floating-add-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 15px 30px rgba(0, 206, 201, 0.6);
+            color: white;
         }
 
-        .card-btn:hover {
-            transform: translateY(-5px);
-            border-color: #60a5fa; 
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.6); 
+        /* تنسيقات المودال المتوافقة مع الـ Dark Mode */
+        .modal-content { 
+            background-color: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 20px; 
+            color: #f8fafc; 
         }
-
-        .card-icon {
-            font-size: 2rem;
-            color: var(--icon-color);
-            margin-bottom: 12px;
-            transition: transform 0.25s ease, color 0.25s ease;
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.4); 
+        .modal-header { border-bottom: 1px solid #334155; font-weight: 700; }
+        .modal-footer { border-top: 1px solid #334155; }
+        .form-control, .form-select { 
+            background-color: #0f172a !important; 
+            border-color: #334155 !important; 
+            color: #ffffff !important; 
+            border-radius: 10px;
+            padding: 8px 12px;
         }
-
-        .card-btn:hover .card-icon {
-            transform: scale(1.12);
-            color: #60a5fa; 
+        .form-control:focus, .form-select:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            text-align: center;
-            color: var(--text-title);
-            letter-spacing: 0.5px;
-        }
-        
-        .card-btn:hover .card-title {
-            color: #93c5fd; 
-        }
+        .form-control::placeholder { color: #475569 !important; }
+        #loading-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); display: none; justify-content: center; align-items: center; z-index: 9999; }
     </style>
 </head>
 <body>
 
+    <div id="loading-overlay"><div class="spinner-border text-primary"></div></div>
+
     <div class="grid-container">
         
-        <!-- كارت 1: الصيانة -->
         <a href="maintenance.html" class="card-btn">
             <i class="fa-solid fa-screwdriver-wrench card-icon"></i>
             <div class="card-title">الصيانة</div>
         </a>
 
-        <!-- كارت 2: النواقص -->
         <a href="shortages.html" class="card-btn">
             <i class="fa-solid fa-boxes-empty card-icon"></i>
             <div class="card-title">النواقص</div>
         </a>
 
-        <!-- كارت 3: الأجهزة -->
         <a href="devices.html" class="card-btn">
             <i class="fa-solid fa-mobile-screen-button card-icon"></i>
             <div class="card-title">الأجهزة</div>
         </a>
 
-        <!-- كارت 4: التركيبات -->
         <a href="installations.html" class="card-btn">
             <i class="fa-solid fa-network-wired card-icon"></i>
             <div class="card-title">التركيبات</div>
         </a>
 
-        <!-- كارت 5: التوافقات -->
         <a href="compatibility.html" class="card-btn">
             <i class="fa-solid fa-code-compare card-icon"></i>
             <div class="card-title">التوافقات</div>
         </a>
 
-        <!-- كارت 6: الديون -->
         <a href="debts.html" class="card-btn">
             <i class="fa-solid fa-file-invoice-dollar card-icon"></i>
             <div class="card-title">الديون</div>
@@ -286,6 +186,87 @@
 
     </div>
 
+    <button class="floating-add-btn" data-bs-toggle="modal" data-bs-target="#addDevModal">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <div class="modal fade" id="addDevModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered px-3">
+            <form class="modal-content" id="devForm">
+                <div class="modal-header"><b>تسجيل جهاز جديد (سريع)</b></div>
+                <div class="modal-body">
+                    <input type="text" id="cName" class="form-control mb-2" placeholder="اسم العميل" required>
+                    <input type="text" id="dType" class="form-control mb-2" placeholder="نوع الجهاز" required>
+                    <input type="text" id="dFault" class="form-control mb-2" placeholder="العطل" required>
+                    <input type="text" id="dImei" class="form-control mb-2" placeholder="رقم الإيمي (IMEI)">
+                    <input type="text" id="dAccessories" class="form-control mb-2" placeholder="الملحقات المستلمة">
+                    <div class="row g-2 mb-2">
+                        <div class="col-6">
+                            <label class="small text-muted mb-1">تاريخ الاستلام:</label>
+                            <input type="date" id="dReceiveDate" class="form-control" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="small text-muted mb-1">تاريخ التسليم المتوقع:</label>
+                            <input type="date" id="dDeliveryDate" class="form-control">
+                        </div>
+                    </div>
+                    <textarea id="dNotes" class="form-control mb-2" placeholder="ملاحظات فنية..."></textarea>
+                    <div class="row g-2">
+                        <div class="col-6"><input type="number" id="cPhone" class="form-control" placeholder="رقم الموبايل"></div>
+                        <div class="col-6"><input type="number" id="dCost" class="form-control" placeholder="التكلفة"></div>
+                    </div>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="submit" class="btn btn-primary w-100" style="border-radius:10px">حفظ وإرسال إلى الصيانة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const DB_URL = "https://repairshop-e2483-default-rtdb.firebaseio.com/"; 
+
+        // وضع تاريخ اليوم تلقائياً بمجرد فتح المودال
+        document.getElementById('addDevModal').addEventListener('show.bs.modal', function () {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dReceiveDate').value = today;
+        });
+
+        // دالة الاتصال بقاعدة البيانات
+        async function api(path, method = "GET", body = null) {
+            document.getElementById('loading-overlay').style.display = 'flex';
+            const options = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) options.body = JSON.stringify(body);
+            const res = await fetch(`${DB_URL}${path}.json`, options);
+            document.getElementById('loading-overlay').style.display = 'none';
+            return res.json();
+        }
+
+        // معالجة إرسال النموذج وحفظ البيانات في مسار الصيانة
+        document.getElementById('devForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const id = "ID" + Date.now();
+            await api(`data/devices/${id}`, "PUT", {
+                id, 
+                name: document.getElementById('cName').value, 
+                phone: document.getElementById('cPhone').value,
+                type: document.getElementById('dType').value, 
+                imei: document.getElementById('dImei').value,
+                fault: document.getElementById('dFault').value, 
+                notes: document.getElementById('dNotes').value,
+                cost: document.getElementById('dCost').value, 
+                status: 'جاهز للصيانة',
+                accessories: document.getElementById('dAccessories').value,
+                receiveDate: document.getElementById('dReceiveDate').value,
+                deliveryDate: document.getElementById('dDeliveryDate').value
+            });
+            
+            // إغلاق المودال وإعادة تعيين الحقول بعد النجاح
+            bootstrap.Modal.getInstance(document.getElementById('addDevModal')).hide();
+            this.reset();
+            alert("تم حفظ الجهاز بنجاح وتحويله إلى صفحة الصيانة بنجاح! 🎉");
+        };
+    </script>
 </body>
 </html>
-</script>
